@@ -67,19 +67,6 @@ forget the quotation marks! Examples: >
     let g:EnhCommentifyUseAltKeys = 'yes'
     let g:EnhCommentifyTraditionalMode = 'N'
 <
-Every of the following options can also be specified for buffers of a
-certain filetype. Simply add 'b:<Option>' to the corresponding
-.vim/ftplugin/foo.vim. Then the settings only applies to buffers of the
-filetype "foo". If no special settings are specified for a buffer the
-global settings from .vimrc apply. For example:
-In your .vimrc: >
-    let g:EnhCommentifyPretty = 'Yes'
-<
-and in .vim/ftplugin/c.vim: >
-    let b:EnhCommentifyPretty = 'No'
-<
-These settings would add a space between code and comment strings unless
-you edit a C file. Then the traditional settings apply.
 
 'g:EnhCommentifyAltOpen'	string (default '|+') (*)
 	Defines the alternative placeholder for the opening string of
@@ -114,11 +101,7 @@ you edit a C file. Then the traditional settings apply.
 	Setting g:EnhCommentifyIdentString to '+' would result in >
     /*+foo();+*/
 <
-'g:EnhCommentifyIdentFrontOnly'	string (default 'No')
-	If using g:EnhCommentifyIdentString, the string is only added at
-	the comment opening string. >
-    /*+foo();*/
-<
+
 'g:EnhCommentifyRespectIndent'	string (default 'No')
 	Respect the indent of a line. The comment leader is inserted correctly
 	indented, not at the beginning of the line.
@@ -169,23 +152,13 @@ you edit a C file. Then the traditional settings apply.
 
 'g:EnhCommentifyUserMode'	string (default: 'No')
 	If this option is set to yes, the scripts lets you decide what to
-	do. Then there are several different keybindings active, one
+	do. Then there are several two different keybindings active, one
 	for commenting, one for decommenting. (see |EnhComm-Keybindings|)
 	This option has no effect if any of these options is set to 'yes':
 	  - g:EnhCommentifyTraditionalMode
 	  - g:EnhCommentifyFirstLineMode
 	  - g:EnhCommentifyUserBindings
 
-'g:EnhCommentifyMultiPartBlocks' string (default: 'No')
-	For languages with mulitpart-comments one can choose to comment a
-	visual block in _one_ comment. >
-    int foo;
-    char bar;
-<
-	is commented to >
-    /*int foo;
-    char bar;*/
-<
 'g:EnhCommentifyUserBindings'	string (default: 'No')
 	This option allows you to choose your own keybindings, without much
 	trouble. Please see below (|EnhComm-Keybindings|) for more details.
@@ -232,6 +205,26 @@ you edit a C file. Then the traditional settings apply.
 	if you do not use g:EnhCommentifyRespectIndent or you won't be
 	able to decomment lines, which are commented with this method,
 	if they have leading whitespace!
+
+'g:EnhCommentifyMultiPartBlocks'string (default: 'No')
+	When using a language with multipart-comments commenting a visual
+	block will result in the whole block commented in unit, not line
+	by line.
+	let g:EnhCommentifyMultiPartBlocks = 'yes' >
+    /*if (foo) {
+        frobnicate(baz);
+    }*/
+<
+
+'g:EnhCommentifyCommentsOp'	string (default: 'No')
+	!!! EXPERIMENTAL !!!
+	When set the comments option is parsed. This is currently only used
+	for the above option in order to set the middle part of the comment.
+	let g:EnhCommentifyCommentsOp = 'yes' >
+    /*if (foo) {
+     *    frobnicate(baz);
+     *}*/
+<
 
 'g:EnhCommentifyAlignRight'	string (default: 'No')
 	When commenting a visual block align the right hand side comment
@@ -441,7 +434,6 @@ bugs: (in temporal order)
  - John Orr
  - Luc Hermite
  - Brett Calcott
- - Ben Kibbey
 
 Thanks to John Orr and Xiangjiang Ma for their rich feedback and to Luc
 Hermite for some good improvement suggestions.
