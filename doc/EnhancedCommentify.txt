@@ -133,6 +133,19 @@ forget the quotation marks! Examples: >
     /* foo(); */
 <
 
+'g:EnhCommentifyBindPerBuffer'	string (default: 'No')
+	Make keybindings local to buffer.
+
+'g:EnhCommentifyBindUnknown'	string (default: 'Yes')
+	If the filetype is not known, don't add keybindings.
+	This option has no meaning, when g:EnhCommentifyBindPerBuffer is
+	set to 'No'.
+
+'g:EnhCommentifyBindInNormal'	string (default: 'Yes')
+'g:EnhCommentifyBindInInsert'
+'g:EnhCommentifyBindInVisual'
+	Add keybindings in normal/insert/visual mode.
+
 'g:EnhCommentifyUseAltKeys'	string (default: 'No')
 	Use alternative keybindings. <Meta-X> instead of <Leader>X. This
 	may cause trouble on some terminals. Eg. aterm has to be used with
